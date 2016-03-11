@@ -85,13 +85,25 @@ $(function () {
         });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection"*/
+    /* Test suite named "New Feed Selection" */
     describe('New Feed Selection', function () {
+        /*  Before loading the new feed, the previous feed data is stored in oldFeed variable */
+        var oldFeed;
 
+        /*  This test ensures that when the new feed is loaded... */
+        beforeEach(function (done) {
+            loadFeed(0, function(){
+                oldFeed = $('.feed').html();
+                loadFeed(1, done);
+            });
+        });
+
+        /* ...the content actually changes. */
+        it('should change the content of the feed, when the new feed is loaded', function (done) {
+            expect(oldFeed).not.toEqual($('.feed').html());
+            done();
+        });
 
     });
-    /* TODO: Write a test that ensures when a new feed is loaded
-     * by the loadFeed function that the content actually changes.
-     * Remember, loadFeed() is asynchronous.
-     */
+
 }());
