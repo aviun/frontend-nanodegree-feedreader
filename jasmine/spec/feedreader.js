@@ -17,7 +17,7 @@ $(function () {
          * allFeeds variable has been defined and that it is not
          * empty.
          */
-        it('are defined', function () {
+        it('should be defined', function () {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -26,7 +26,7 @@ $(function () {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('have a defined URL, which is not empty', function () {
+        it('should have a defined URL, which is not empty', function () {
 
             allFeeds.forEach(function (feed) {
                 expect(feed.url).toBeDefined();
@@ -39,7 +39,7 @@ $(function () {
          * and that the name is not empty.
          */
 
-        it('have a defined name, which is not empty', function () {
+        it('should have a defined name, which is not empty', function () {
 
             allFeeds.forEach(function (feed) {
                 expect(feed.name).toBeDefined();
@@ -51,36 +51,46 @@ $(function () {
     /* Test suite designed to test "The menu" */
     describe('The menu', function () {
 
-        /*This test checks if menu is hidden by default, determining if body has class 'menu-hidden'*/
-        it('is hidden by default', function(){
+        /* This test checks if menu is hidden by default, determining if body has class 'menu-hidden' */
+        it('should be hidden by default', function () {
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
-        /*The menu becomes visible when the icon is clicked*/
-        it('appears when the menu icon is clicked', function(){
+        /* The menu becomes visible when the icon is clicked */
+        it('should appear when the menu icon is clicked', function () {
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
         });
 
-        /*The menu hides again when the menu icon is clicked again*/
-        it('disappears when the menu icon is clicked again', function(){
+        /* The menu hides again when the menu icon is clicked again */
+        it('should disappear when the menu icon is clicked again', function () {
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(true);
 
         });
     });
-    /* TODO: Write a new test suite named "Initial Entries" */
 
-    /* TODO: Write a test that ensures when the loadFeed
-     * function is called and completes its work, there is at least
-     * a single .entry element within the .feed container.
-     * Remember, loadFeed() is asynchronous so this test will require
-     * the use of Jasmine's beforeEach and asynchronous done() function.
-     */
+    /* Test suite designed to test "Initial Entries" */
+    describe('Initial Entries', function () {
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+        /* Test that ensures when the loadFeed function is called and completes its work..  */
+        beforeEach(function (done) {
+            loadFeed(0, done);
+        });
 
-     /* TODO: Write a test that ensures when a new feed is loaded
+        /* ..there is at least a single .entry element within the .feed container. */
+        it('should have at least 1 entry when loaded', function (done) {
+            expect($('.entry')[0]).toBeDefined();
+            done();
+        });
+    });
+
+    /* TODO: Write a new test suite named "New Feed Selection"*/
+    describe('New Feed Selection', function () {
+
+
+    });
+    /* TODO: Write a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
